@@ -1463,7 +1463,4 @@
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="temp.txt" />
-  </ItemGroup>
 </Project>
