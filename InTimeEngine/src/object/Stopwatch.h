@@ -11,22 +11,45 @@
 
 /******************************************************************************
  * Project: In Time Engine
- * File: ObjectStatus.h
+ * File: Stopwatch.h
  * Author: Christopher Barrios Agosto
- * Created on: 13DEC2024
+ * Created on: 25DEC2024
+ * Updated on: 25DEC2024
  *
  * Description:
- *  ObjectStatus:
- *   This enum exists to track where in the lifecycle are game objects and
- *   components by the game engine.
+ *  Stopwatch class that uses the In Time Engine's core time.
+ *  Use the running variable to control whether it ticks or not.
  *****************************************************************************/
 
 #pragma once
 
+// Dependencies | InTimeEngine
+#include "../InTimeEngine.h"
+
 namespace IT {
-	enum class ObjectStatus {
-		HEALTHY = 0,
-		MARKED_FOR_DESTROY,
-		DESTROYED
+	class Stopwatch : public ICoreUpdate {
+		// Object
+		public:
+			// Properties
+			bool running = false;
+			std::chrono::nanoseconds timeElapsed = std::chrono::nanoseconds(0);
+
+			// Constructor / Destructor
+			Stopwatch() = default;
+			~Stopwatch() = default;
+
+			// Getters
+			std::chrono::nanoseconds getTimeElapsed() const {
+				return timeElapsed;
+			}
+			
+			// Events
+			void onPreCoreUpdate() override {
+				if (running)
+					timeElapsed += IT::InTimeEngine::getSingleton()->coreTime.getDeltaTime();
+			}
+			void onPostCoreUpdate() override {
+				// Ignored
+			}
 	};
 }

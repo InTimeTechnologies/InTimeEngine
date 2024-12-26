@@ -14,7 +14,6 @@
  * File: MemoryAllocationType.h
  * Author: Christopher Barrios Agosto
  * Created on: 13DEC2024
- * Updated on: 13DEC2024
  *
  * Description:
  *  This enum exists to track whether an object is stack or heap allocated.

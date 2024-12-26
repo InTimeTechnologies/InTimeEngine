@@ -14,7 +14,6 @@
  * File: InTimeEngine.cpp
  * Author: Christopher Barrios Agosto
  * Created on: 13DEC2024
- * Updated on: 13DEC2024
  *
  * Description:
  *  Operates all the core systems of the engine such as:
@@ -49,9 +48,6 @@
 #include "IRenderer.h"
 #include "IWindow.h"
 #include "IInput.h"
-
-// Dependencies | Components
-#include "component/EmptyComponent.h"
 
 // Namespace
 namespace IT {
@@ -133,3 +129,10 @@ namespace IT {
 			void collectGarbage();
 	};
 }
+
+// Dependencies | Components
+#include "component/EmptyComponent.h"
+
+// Dependencies | InTimeEngine | Object
+#include "object/Stopwatch.h"
+#include "object/Timer.h"

@@ -14,7 +14,6 @@
  * File: Transform.cpp
  * Author: Christopher Barrios Agosto
  * Created on: 13DEC2024
- * Updated on: 13DEC2024
  *
  * Description:
  *  Owned through "has a" relationship by the GameObject class.

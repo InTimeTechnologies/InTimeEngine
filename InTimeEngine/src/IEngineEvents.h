@@ -14,7 +14,6 @@
  * File: IEngineEvents.h
  * Author: Christopher Barrios Agosto
  * Created on: 13DEC2024
- * Updated on: 13DEC2024
  *
  * Description:
  *  This file containes all engine Javalike interface classes.

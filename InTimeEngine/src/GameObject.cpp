@@ -14,7 +14,6 @@
  * File: GameObject.h
  * Author: Christopher Barrios Agosto
  * Created on: 13DEC2024
- * Updated on: 13DEC2024
  *
  * Description:
  *  Serves as a container for components created by the user. It has a

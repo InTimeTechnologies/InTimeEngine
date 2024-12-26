@@ -14,7 +14,6 @@
  * File: Component.h
  * Author: Christopher Barrios Agosto
  * Created on: 13DEC2024
- * Updated on: 13DEC2024
  *
  * Description:
  *  This is what gives functionality to whatever game object it is attached to

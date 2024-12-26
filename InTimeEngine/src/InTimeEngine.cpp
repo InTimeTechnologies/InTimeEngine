@@ -14,7 +14,6 @@
  * File: InTimeEngine.cpp
  * Author: Christopher Barrios Agosto
  * Created on: 13DEC2024
- * Updated on: 13DEC2024
  *
  * Description:
  *  Operates all the core systems of the engine such as:

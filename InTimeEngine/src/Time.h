@@ -14,7 +14,6 @@
  * File: Time.h
  * Author: Christopher Barrios Agosto
  * Created on: 13DEC2024
- * Updated on: 13DEC2024
  *
  * Description:
  *  class Time:

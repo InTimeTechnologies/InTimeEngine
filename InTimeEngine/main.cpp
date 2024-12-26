@@ -17,7 +17,6 @@
 // Dependencies | Test
 #include "test/FPSConsoleDisplay.h"
 #include "test/GameObjectTest.h"
-#include "test/EngineKillTimer.h"
 
 int main(int argc, char* argv[]) {
 	std::cout << "Program operating" << std::endl;
@@ -40,7 +39,11 @@ int main(int argc, char* argv[]) {
 		// Create test cases
 		Test::FPSConsoleDisplay fpsCounterDisplay = Test::FPSConsoleDisplay();
 		Test::GameObjectTest gameObjectTest = Test::GameObjectTest();
-		Test::EngineKillTimer engineKillTimer = Test::EngineKillTimer();
+
+		// Set timer to stop the engine
+		IT::Timer engineKillTimer = IT::Timer(std::chrono::seconds(5));
+		engineKillTimer.function = []() { IT::InTimeEngine::getSingleton()->stop(); };
+		engineKillTimer.start();
 
 		// Run engine
 		engine->run();
@@ -49,7 +52,7 @@ int main(int argc, char* argv[]) {
 		delete(engine); // Calling delete to run memory test
 	}
 
-	// Clean resources
+	// Clean GLFW resources
 	glfwTerminate();
 
 	std::cout << "Program terminating" << std::endl;

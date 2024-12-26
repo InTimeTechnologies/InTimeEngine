@@ -42,9 +42,6 @@
     <ClCompile Include="test\GameObjectTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test\EngineKillTimer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="box2d_engine\Box2DCallback.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -128,9 +125,6 @@
     <ClInclude Include="test\GameObjectTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="test\EngineKillTimer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\component\EmptyComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -204,9 +198,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\IInput.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\IInputSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="vendor\glm\detail\_features.hpp">
@@ -1056,6 +1047,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\object\Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\object\Stopwatch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

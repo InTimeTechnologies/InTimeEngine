@@ -113,7 +113,6 @@
     <ClCompile Include="src\Time.cpp" />
     <ClCompile Include="src\Transform.cpp" />
     <ClCompile Include="test\FPSConsoleDisplay.cpp" />
-    <ClCompile Include="test\EngineKillTimer.cpp" />
     <ClCompile Include="test\GameObjectTest.cpp" />
     <ClCompile Include="vendor\glm\detail\glm.cpp" />
     <ClCompile Include="vulkan_engine\VulkanEngine.cpp" />
@@ -140,7 +139,6 @@
     <ClInclude Include="glfw_interface\GLFWWindow.h" />
     <ClInclude Include="src\component\EmptyComponent.h" />
     <ClInclude Include="src\IInput.h" />
-    <ClInclude Include="src\IInputSystem.h" />
     <ClInclude Include="src\IPhysicsEngine2D.h" />
     <ClInclude Include="src\IRenderer.h" />
     <ClInclude Include="src\IWindow.h" />
@@ -150,12 +148,12 @@
     <ClInclude Include="src\IEngineEvents.h" />
     <ClInclude Include="src\InTimeEngine.h" />
     <ClInclude Include="src\ObjectStatus.h" />
+    <ClInclude Include="src\object\Stopwatch.h" />
+    <ClInclude Include="src\object\Timer.h" />
     <ClInclude Include="src\Time.h" />
     <ClInclude Include="src\Transform.h" />
     <ClInclude Include="test\FPSConsoleDisplay.h" />
-    <ClInclude Include="test\EngineKillTimer.h" />
     <ClInclude Include="test\GameObjectTest.h" />
-    <ClInclude Include="src\object\Timer.h" />
     <ClInclude Include="vendor\glm\common.hpp" />
     <ClInclude Include="vendor\glm\detail\compute_common.hpp" />
     <ClInclude Include="vendor\glm\detail\compute_vector_relational.hpp" />
