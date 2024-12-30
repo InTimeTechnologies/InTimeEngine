@@ -33,12 +33,6 @@ namespace IT {
 			// Properties
 			static std::chrono::nanoseconds defaultTimeLeft;
 
-			// Functions
-			static void emptyFunction() {
-				// Left empty intentionally
-				// This is the default function to be called from the "function" varaible.
-			}
-
 		// Object
 		private:
 			// Properties
@@ -48,7 +42,7 @@ namespace IT {
 		public:
 			// Properties
 			std::chrono::nanoseconds initialTimeLeft = defaultTimeLeft;
-			std::function<void()> function = emptyFunction; // Set to emptyFunction by default to prevent it from being called without it being set. This prevent the code to crash.
+			std::function<void()> function = std::function<void()>();
 
 			// Constructor / Destructor
 			Timer() = default;
@@ -62,7 +56,10 @@ namespace IT {
 
 				timeLeft -= InTimeEngine::getSingleton()->coreTime.getDeltaTime();
 				if (timeLeft <= std::chrono::nanoseconds(0)) {
-					function();
+					bool functionIsSet = static_cast<bool>(function);
+					if (functionIsSet)
+						function();
+
 					running = false;
 				}
 			}

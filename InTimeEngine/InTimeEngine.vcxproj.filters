@@ -72,25 +72,25 @@
     <ClCompile Include="vulkan_engine\VulkanEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="glfw_interface\GLFWInput.cpp">
+    <ClCompile Include="glfw_system\Input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="glfw_interface\GLFWJoystick.cpp">
+    <ClCompile Include="glfw_system\Joystick.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="glfw_interface\GLFWWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IInput.cpp">
+    <ClCompile Include="glfw_system\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="vendor\glm\detail\glm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\object\Timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IInput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="glfw_system\System.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -158,46 +158,40 @@
     <ClInclude Include="vulkan_engine\VulkanEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\IWindow.h">
+    <ClInclude Include="glfw_system\Input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="glfw_interface\GLFWInput.h">
+    <ClInclude Include="glfw_system\Joystick.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="glfw_interface\GLFWJoystick.h">
+    <ClInclude Include="glfw_system\JoystickAxis.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="glfw_interface\GLFWJoystickAxis.h">
+    <ClInclude Include="glfw_system\JoystickAxisCode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="glfw_interface\GLFWJoystickAxisCode.h">
+    <ClInclude Include="glfw_system\JoystickButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="glfw_interface\GLFWJoystickButton.h">
+    <ClInclude Include="glfw_system\JoystickButtonCode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="glfw_interface\GLFWJoystickButtonCode.h">
+    <ClInclude Include="glfw_system\JoystickCode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="glfw_interface\GLFWJoystickCode.h">
+    <ClInclude Include="glfw_system\Key.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="glfw_interface\GLFWKey.h">
+    <ClInclude Include="glfw_system\KeyCode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="glfw_interface\GLFWKeyCode.h">
+    <ClInclude Include="glfw_system\MouseButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="glfw_interface\GLFWMouseButton.h">
+    <ClInclude Include="glfw_system\MouseButtonCode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="glfw_interface\GLFWMouseButtonCode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="glfw_interface\GLFWWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\IInput.h">
+    <ClInclude Include="glfw_system\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="vendor\glm\detail\_features.hpp">
@@ -1050,6 +1044,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\object\Stopwatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IInput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="glfw_system\System.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

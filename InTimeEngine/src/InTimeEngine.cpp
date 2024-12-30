@@ -46,18 +46,6 @@ IT::InTimeEngine* IT::InTimeEngine::getSingleton() {
 	return singleton;
 }
 
-// Functions
-void IT::InTimeEngine::voidEmptyFunction() {
-	return; // Left empty intentionally
-}
-bool IT::InTimeEngine::boolEmptyFunction() {
-	return true; // Defaults to return true to force engine to stop when called without this function being replaced by user.
-}
-void IT::InTimeEngine::physicsUpdateEmptyFunction(float timeStep) {
-	return; // Left empty intentionally
-}
-
-
 // Object | public
 
 // Constructor / Destructor
@@ -101,13 +89,10 @@ void IT::InTimeEngine::run() {
 		bool coreRequiresUpdate = coreTime.updateTime(engineTime.runTime);
 		bool physicsRequiresUpdate = physicsTime.updateTime(engineTime.runTime);
 
-		// Reset keyboard keys (justPressed, justReleased, repeat)
-		resetInput();
-
-		// If core requires update, update UI and input
-		if (coreRequiresUpdate) {
+		// If core or physics requires update, update UI and input
+		if (coreRequiresUpdate || physicsRequiresUpdate) {
+			resetInput();
 			processInput();
-			processUIEvents();
 		}
 
 		// Init components (enable, disable, start)
@@ -143,7 +128,10 @@ void IT::InTimeEngine::run() {
 
 		// Process termination
 		if (shouldStop) {
-			shouldStop = onStopCallback();
+			bool callbackIsSet = static_cast<bool>(onStopCallback);
+			if (callbackIsSet)
+				shouldStop = onStopCallback();
+
 			if (!shouldStop)
 				continue;
 
@@ -155,7 +143,9 @@ void IT::InTimeEngine::run() {
 		if (shouldPause) {
 			bool processed = false;
 			do {
-				processed = onPauseCallback();
+				bool callbackIsSet = static_cast<bool>(onPauseCallback);
+				if (callbackIsSet)
+					processed = onPauseCallback();
 			} while (!processed);
 
 			shouldPause = false;
@@ -179,14 +169,14 @@ void IT::InTimeEngine::initializeLogics() {
 }
 
 void IT::InTimeEngine::resetInput() {
-	IWindow::resetKeyboardInputFunction();
-	IInput::resetJoystickInputFunction();
+	IInputSystem* inputSystem = IInputSystem::getSingleton();
+	if (inputSystem != nullptr)
+		inputSystem->resetInput();
 }
 void IT::InTimeEngine::processInput() {
-	IInput::processInput();
-}
-void IT::InTimeEngine::processUIEvents() {
-	IWindow::pollEventsFunction();
+	IInputSystem* inputSystem = IInputSystem::getSingleton();
+	if (inputSystem != nullptr)
+		inputSystem->processInput();
 }
 
 void IT::InTimeEngine::preUpdate() {
@@ -245,8 +235,8 @@ void IT::InTimeEngine::render() {
 	//ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
 	// Swap the frame buffer
-	for (IWindow* window : IWindow::windowList)
-		window->swapBuffers();
+	//for (IWindow* window : IWindow::windowList)
+	//	window->swapBuffers();
 }
 void IT::InTimeEngine::postRender() {
 	for (IRender* iRender : IRender::iRenderList)

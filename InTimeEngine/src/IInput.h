@@ -11,29 +11,96 @@
 
 /******************************************************************************
  * Project: In Time Engine
- * File: IInput.h
+ * File: IInputSystem.h
  * Author: Christopher Barrios Agosto
- * Created on: 13DEC2024
+ * Created on: 29DEC2024
  *
  * Description:
- *  This class is the interface that the input system must override so
- *  In Time Engine can use is as its input system.
+ *  IInputSystem:
+ *   It is the system in charge of updating IInput and IJoysticInput through
+ *   the processInput and resetInput functions.
+ *  IInput:
+ *   Mouse and keyboard input system interface that must be overriden so
+ *   In Time Engine can use it as its internal input system.
+ *   It mainly provides the means to reset the moust & keyboard input.
+ *  IJoysticInput:
+ *   Joystic input system interface that must be overriden so
+ *   In Time Engine can use it as its internal input system.
+ *   It mainly provides the means to rese the joystic input.
  *****************************************************************************/
 
 #pragma once
 
 // Dependencies | std
-#include <functional>
+#include <list>
 
 namespace IT {
-	class IInput {
+	class IInputSystem {
 		// Static
-		public:
+		private:
 			// Properties
-			static std::function<void()> resetJoystickInputFunction;
-			static std::function<void()> processInput;
+			static IInputSystem* singleton;
+
+		public:
+			// Getters
+			static IInputSystem* getSingleton();
+
+		// Object
+		public:
+			// Constructor / Destructor
+			IInputSystem();
+			virtual ~IInputSystem();
 
 			// Functions
-			static void emptyVoidFunction();
+			virtual void init();
+			virtual void processInput();
+			virtual void resetInput();
+	};
+
+	class IInput {
+		// Static
+		private:
+			// Properties
+			static std::list<IInput*> iInputList;
+
+		public:
+			// Getters
+			static std::list<IInput*> getIInputList();
+
+		// Object
+		public:
+			// Properties
+			std::list<IInput*>::iterator node;
+
+			// Constructor / Destructor
+			IInput();
+			virtual ~IInput();
+
+			// Functions
+			virtual void reset();
+	};
+
+	class IJoystickInput {
+		// Static
+		private:
+			// Properties
+			static std::list<IJoystickInput*> iJoystickInputList;
+
+		public:
+			// Getters
+			static std::list<IJoystickInput*> getIInputList();
+
+		// Object
+		public:
+			// Properties
+			std::list<IJoystickInput*>::iterator node;
+
+			// Constructor / Destructor
+			IJoystickInput();
+			virtual ~IJoystickInput();
+
+			// Functions
+			virtual void processInput();
+			virtual void reset();
 	};
 }

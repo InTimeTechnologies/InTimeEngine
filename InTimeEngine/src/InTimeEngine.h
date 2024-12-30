@@ -46,7 +46,6 @@
 #include "IEngineEvents.h"
 #include "IPhysicsEngine2D.h"
 #include "IRenderer.h"
-#include "IWindow.h"
 #include "IInput.h"
 
 // Namespace
@@ -64,11 +63,6 @@ namespace IT {
 			// Getters
 			static InTimeEngine* getSingleton();
 
-			// Functions
-			static void voidEmptyFunction();
-			static bool boolEmptyFunction();
-			static void physicsUpdateEmptyFunction(float timeStep);
-
 		// Object
 		private:
 			// Properties
@@ -84,8 +78,8 @@ namespace IT {
 			IRenderer* iRenderer = nullptr;
 
 			// Callbacks
-			std::function<bool()> onPauseCallback = boolEmptyFunction;
-			std::function<bool()> onStopCallback = boolEmptyFunction;
+			std::function<bool()> onPauseCallback = std::function<bool()>();
+			std::function<bool()> onStopCallback = std::function<bool()>();
 
 			// Flags
 			bool destroyGameObjectsOnStop = false;
@@ -111,7 +105,6 @@ namespace IT {
 
 			void resetInput();
 			void processInput();
-			void processUIEvents();
 
 			void preUpdate();
 			void coreUpdate();

@@ -11,50 +11,50 @@
 
 /******************************************************************************
  * Project: In Time Engine
- * File: IWindow.h
+ * File: Window.h
  * Author: Christopher Barrios Agosto
- * Created on: 13DEC2024
+ * Created on: 29DEC2024
  *
  * Description:
- *  This class is the interface that window systems must override so In Time
- *  Engine object can use it as its windowing system.
+ *  Wrapper class around GLFW window pointer.
  *****************************************************************************/
 
 #pragma once
 
 // Dependencies | std
-#include <functional>
-#include <list>
+#include <string>
 
-namespace IT {
-	class IWindow {
-		// Friends
-		friend class InTimeEngine;
+// Dependencies | GLFWInterface
+#include "Input.h"
 
+namespace GLFW {
+	class Window {
 		// Static
-		protected:
-			// Properties
-			static std::list<IWindow*> windowList;
-
 		public:
 			// Properties
-			static std::function<void()> pollEventsFunction;
-			static std::function<void()> resetKeyboardInputFunction;
+			static int defaultWidth;
+			static int defaultHeight;
+			static std::string defaultName;
 
-			// Functions
-			static void emptyVoidFunction();
+			// Callbacks
+			static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+			static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
 
 		// Object
-		protected:
+		private:
 			// Properties
-			std::list<IWindow*>::iterator node;
+			GLFWwindow* window = nullptr;
 
 		public:
-			// Constructor / Destructor
-			IWindow();
-			virtual ~IWindow();
+			// Properties
+			GLFW::Input input;
 
-			// Functions
-			virtual void swapBuffers();
+			// Constructor / Destructor
+			Window();
+			Window(int width, int height, const std::string& title, GLFWmonitor* monitor, GLFWwindow* share);
+			~Window();
+
+			// Getters
+			GLFWwindow* getWindow() const;
 	};
 }
