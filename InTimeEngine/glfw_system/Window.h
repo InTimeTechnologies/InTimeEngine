@@ -23,6 +23,7 @@
 
 // Dependencies | std
 #include <string>
+#include <list>
 
 // Dependencies | GLFWInterface
 #include "Input.h"
@@ -30,11 +31,18 @@
 namespace GLFW {
 	class Window {
 		// Static
+		private:
+			// Properties
+			static std::list<Window*> windowList;
+
 		public:
 			// Properties
 			static int defaultWidth;
 			static int defaultHeight;
 			static std::string defaultName;
+
+			// Getters
+			static std::list<Window*> getWindowList();
 
 			// Callbacks
 			static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -47,6 +55,7 @@ namespace GLFW {
 
 		public:
 			// Properties
+			std::list<GLFW::Window*>::iterator node;
 			GLFW::Input input;
 
 			// Constructor / Destructor

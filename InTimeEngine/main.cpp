@@ -11,7 +11,7 @@
 // Dependencies | Vulkan
 #include <vulkan_engine/VulkanEngine.h>
 
-// Dependencies | GLFW
+// Dependencies | GLFW system
 #include "glfw_system/System.h"
 
 // Dependencies | Test
@@ -42,9 +42,14 @@ int main(int argc, char* argv[]) {
 		Test::GameObjectTest gameObjectTest = Test::GameObjectTest();
 
 		// Set timer to stop the engine
-		IT::Timer engineKillTimer = IT::Timer(std::chrono::seconds(10));
-		engineKillTimer.function = []() { IT::InTimeEngine::getSingleton()->stop(); };
-		engineKillTimer.start();
+		//IT::Timer engineKillTimer = IT::Timer(std::chrono::seconds(10));
+		//engineKillTimer.function = []() { IT::InTimeEngine::getSingleton()->stop(); };
+		//engineKillTimer.start();
+
+		// Set engine killer
+		IT::KeyControl engineKiller = IT::KeyControl();
+		engineKiller.keysToMatch = { GLFW::KeyCode::LEFT_SHIFT, GLFW::KeyCode::ESCAPE };
+		engineKiller.function = []() { IT::InTimeEngine::getSingleton()->stop(); };
 
 		// Run engine
 		engine->run();

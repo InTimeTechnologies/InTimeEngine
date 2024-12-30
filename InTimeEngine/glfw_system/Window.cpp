@@ -17,11 +17,17 @@
  *
  * Description:
  *  Wrapper class around GLFW window pointer.
+ *  Each window has its own Input object (mouse and keyboard).
  *****************************************************************************/
 
 #include "Window.h"
 
 // class Window
+
+// Static | private
+
+// Properties
+std::list<GLFW::Window*> GLFW::Window::windowList = std::list<GLFW::Window*>();
 
 // Static | public
 
@@ -29,6 +35,11 @@
 int GLFW::Window::defaultWidth = 800;
 int GLFW::Window::defaultHeight = 600;
 std::string GLFW::Window::defaultName = "GLFW Window";
+
+// Getters
+std::list<GLFW::Window*> GLFW::Window::getWindowList() {
+	return windowList;
+}
 
 // Callbacks
 void GLFW::Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
@@ -74,7 +85,8 @@ void GLFW::Window::mouseButtonCallback(GLFWwindow* window, int button, int actio
 
 // Constructor / Destructor
 GLFW::Window::Window() : GLFW::Window(defaultWidth, defaultHeight, defaultName, nullptr, nullptr) {
-
+	// All code is ran through the other contructor
+	// Do not place code here. It might not be ran
 }
 GLFW::Window::Window(int width, int height, const std::string& title, GLFWmonitor* monitor, GLFWwindow* share) {
 	// Set window hints prior to creation (remove this in production. This needs to be set outside of this class)
@@ -89,9 +101,13 @@ GLFW::Window::Window(int width, int height, const std::string& title, GLFWmonito
 	// Set callbacks
 	glfwSetKeyCallback(window, keyCallback);
 	glfwSetMouseButtonCallback(window, mouseButtonCallback);
+
+	windowList.push_back(this);
+	node = std::prev(windowList.end());
 }
 GLFW::Window::~Window() {
 	glfwDestroyWindow(window);
+	windowList.erase(node);
 }
 
 // Getters

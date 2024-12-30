@@ -148,6 +148,7 @@
     <ClInclude Include="src\IEngineEvents.h" />
     <ClInclude Include="src\InTimeEngine.h" />
     <ClInclude Include="src\ObjectStatus.h" />
+    <ClInclude Include="src\object\KeyControl.h" />
     <ClInclude Include="src\object\Stopwatch.h" />
     <ClInclude Include="src\object\Timer.h" />
     <ClInclude Include="src\Time.h" />

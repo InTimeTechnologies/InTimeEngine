@@ -129,3 +129,4 @@ namespace IT {
 // Dependencies | InTimeEngine | Object
 #include "object/Stopwatch.h"
 #include "object/Timer.h"
+#include "object/KeyControl.h"

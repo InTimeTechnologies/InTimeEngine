@@ -1052,6 +1052,9 @@
     <ClInclude Include="glfw_system\System.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\object\KeyControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="vendor\glm\detail\func_common.inl">
