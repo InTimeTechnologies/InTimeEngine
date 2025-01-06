@@ -21,41 +21,44 @@
 int main(int argc, char* argv[]) {
 	std::cout << "Program operating" << std::endl;
 
-	// Create Box2D engine
-	Box2DEngine* box2DEngine = new Box2DEngine();
-
-	// Create GLFW window system
-	GLFW::System glfwSystem = GLFW::System();
-	GLFW::Window window = GLFW::Window();
-
-	// Create Vulkan engine
-	IT::VulkanEngine vulkanEngine = IT::VulkanEngine();
-
-	// Closed in brakets for memory test
 	{
-		// Create In Time Engine
-		std::filesystem::path applicationDirectoryPath = std::filesystem::path(argv[0]).parent_path();
-		IT::InTimeEngine* engine = new IT::InTimeEngine(applicationDirectoryPath); // Allocated in heap for memory test
+		// Create Box2D engine
+		Box2DEngine* box2DEngine = new Box2DEngine();
 
-		// Create test cases
-		Test::FPSConsoleDisplay fpsCounterDisplay = Test::FPSConsoleDisplay();
-		Test::GameObjectTest gameObjectTest = Test::GameObjectTest();
+		// Create GLFW window system
+		GLFW::System glfwSystem = GLFW::System();
+		GLFW::Window window = GLFW::Window();
 
-		// Set timer to stop the engine
-		//IT::Timer engineKillTimer = IT::Timer(std::chrono::seconds(10));
-		//engineKillTimer.function = []() { IT::InTimeEngine::getSingleton()->stop(); };
-		//engineKillTimer.start();
+		// Create Vulkan engine
+		IT::VulkanEngine::s_init();
+		IT::VulkanEngine vulkanEngine = IT::VulkanEngine(window.getWindow());
 
-		// Set engine killer
-		IT::KeyControl engineKiller = IT::KeyControl();
-		engineKiller.keysToMatch = { GLFW::KeyCode::LEFT_SHIFT, GLFW::KeyCode::ESCAPE };
-		engineKiller.function = []() { IT::InTimeEngine::getSingleton()->stop(); };
+		// Closed in brakets for memory test
+		{
+			// Create In Time Engine
+			std::filesystem::path applicationDirectoryPath = std::filesystem::path(argv[0]).parent_path();
+			IT::InTimeEngine* engine = new IT::InTimeEngine(applicationDirectoryPath); // Allocated in heap for memory test
 
-		// Run engine
-		engine->run();
+			// Create test cases
+			Test::FPSConsoleDisplay fpsCounterDisplay = Test::FPSConsoleDisplay();
+			Test::GameObjectTest gameObjectTest = Test::GameObjectTest();
 
-		// Clean resources
-		delete(engine); // Calling delete to run memory test
+			// Set timer to stop the engine
+			//IT::Timer engineKillTimer = IT::Timer(std::chrono::seconds(10));
+			//engineKillTimer.function = []() { IT::InTimeEngine::getSingleton()->stop(); };
+			//engineKillTimer.start();
+
+			// Set engine killer
+			IT::KeyControl engineKiller = IT::KeyControl();
+			engineKiller.keysToMatch = { GLFW::KeyCode::LEFT_SHIFT, GLFW::KeyCode::ESCAPE };
+			engineKiller.function = []() { IT::InTimeEngine::getSingleton()->stop(); };
+
+			// Run engine
+			engine->run();
+
+			// Clean resources
+			delete(engine); // Calling delete to run memory test
+		}
 	}
 
 	std::cout << "Program terminating" << std::endl;
