@@ -75,6 +75,7 @@ namespace IT {
 			std::string name = defaultName;
 			Transform transform = Transform(*this);
 			bool deleteOnDestroy = true;
+			int sceneIndex = 0;
 
 		private:
 			// Properties

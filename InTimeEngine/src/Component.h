@@ -31,7 +31,8 @@
 #include <vector>
 #include <list>
 
-// Depencies | CoreEngine
+// Depencies | InTimeEngine
+#include "ComponentType.h"
 #include "ObjectStatus.h"
 #include "MemoryAllocationType.h"
 
@@ -50,6 +51,7 @@ namespace IT {
 		// Static
 		private:
 			// Properties
+			static const ComponentType COMPONENT_TYPE = ComponentType::COMPONENT;
 			static std::list<Component*> componentsToDelete;
 			static MemoryAllocationType currentObjectMemoryAllocationType; // Used by the new function to pass data from it to the object
 
@@ -69,6 +71,7 @@ namespace IT {
 		public:
 			// Properties
 			bool deleteOnDestroy = true;
+			unsigned long long sceneIndex = 0ULL;
 
 			// Constructors / Destructor
 			Component(GameObject& gameObject, const type_info& typeInfo);
@@ -79,6 +82,7 @@ namespace IT {
 			const type_info& getTypeInfo() const;
 			ObjectStatus getStatus() const;
 			MemoryAllocationType getMemoryAllocationType() const;
+			virtual ComponentType getComponentType() const;
 
 			// Functions
 			void destroy();

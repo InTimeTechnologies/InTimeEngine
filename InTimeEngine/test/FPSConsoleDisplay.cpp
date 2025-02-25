@@ -9,25 +9,25 @@
 
 // Functions
 void Test::FPSConsoleDisplay::onPreCoreUpdate() {
-	IT::Time* coreTime = &IT::InTimeEngine::getSingleton()->coreTime;
-	IT::Time* physicsTime = &IT::InTimeEngine::getSingleton()->physicsTime;
+	IT::Time* coreTime = &IT::InTimeEngine::s_getSingleton()->time;
+	IT::Time* fixedTime = &IT::InTimeEngine::s_getSingleton()->fixedTime;
 	
 	if (coreTime->getTime() > timeToPrint) {
 		unsigned long long coreTickCount = coreTime->getTickCount() - coreLastTickCount;
-		unsigned long long physicsTickCount = physicsTime->getTickCount() - physicLastTickCount;
+		unsigned long long physicsTickCount = fixedTime->getTickCount() - physicLastTickCount;
 
 		std::cout << "Time report:\n";
-		std::cout << "    Core time:\n";
+		std::cout << "    Time:\n";
 		std::cout << "        Time:        " << coreTime->getTime() << "\n";
 		std::cout << "        Scaled time: " << coreTime->getScaledTime() << "\n";
 		std::cout << "        Tick count:  " << coreTickCount << "\n";
-		std::cout << "    Physics time:\n";
-		std::cout << "        Time:        " << physicsTime->getTime() << "\n";
-		std::cout << "        Scaled time: " << physicsTime->getScaledTime() << "\n";
+		std::cout << "    Fixed time:\n";
+		std::cout << "        Time:        " << fixedTime->getTime() << "\n";
+		std::cout << "        Scaled time: " << fixedTime->getScaledTime() << "\n";
 		std::cout << "        Tick count:  " << physicsTickCount << std::endl;
 
 		coreLastTickCount = coreTime->getTickCount();
-		physicLastTickCount = physicsTime->getTickCount();
+		physicLastTickCount = fixedTime->getTickCount();
 
 		timeToPrint += std::chrono::seconds(1);
 	}

@@ -41,5 +41,6 @@ namespace IT {
 
 			// Functions
 			virtual void render();
+			virtual void onSurfaceResize(int width, int height);
 	};
 }

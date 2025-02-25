@@ -26,8 +26,9 @@
 
 #include "Component.h"
 
-// Dependencies | CoreEngine
+// Dependencies | InTimeEngine
 #include "GameObject.h"
+#include "ComponentRegistry.h"
 
 // Component
 
@@ -89,6 +90,9 @@ IT::ObjectStatus IT::Component::getStatus() const {
 }
 IT::MemoryAllocationType IT::Component::getMemoryAllocationType() const {
 	return memoryAllocationType;
+}
+IT::ComponentType IT::Component::getComponentType() const {
+	return COMPONENT_TYPE;
 }
 
 // Functions

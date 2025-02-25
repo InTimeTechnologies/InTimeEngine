@@ -54,7 +54,7 @@ namespace IT {
 				if (!running)
 					return;
 
-				timeLeft -= InTimeEngine::getSingleton()->coreTime.getDeltaTime();
+				timeLeft -= InTimeEngine::s_getSingleton()->time.getDeltaTime();
 				if (timeLeft <= std::chrono::nanoseconds(0)) {
 					bool functionIsSet = static_cast<bool>(function);
 					if (functionIsSet)

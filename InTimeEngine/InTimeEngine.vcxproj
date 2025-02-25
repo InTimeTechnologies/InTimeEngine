@@ -102,6 +102,7 @@
     <ClCompile Include="glfw_system\System.cpp" />
     <ClCompile Include="glfw_system\Window.cpp" />
     <ClCompile Include="src\Component.cpp" />
+    <ClCompile Include="src\ComponentRegistry.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\IEngineEvents.cpp" />
     <ClCompile Include="src\IInput.cpp" />
@@ -109,12 +110,20 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\IPhysicsEngine2D.cpp" />
     <ClCompile Include="src\IRenderer.cpp" />
+    <ClCompile Include="src\Resource.cpp" />
+    <ClCompile Include="src\scene\SceneManager.cpp" />
     <ClCompile Include="src\object\Timer.cpp" />
+    <ClCompile Include="src\scene\Serializer.cpp" />
     <ClCompile Include="src\Time.cpp" />
     <ClCompile Include="src\Transform.cpp" />
     <ClCompile Include="test\FPSConsoleDisplay.cpp" />
     <ClCompile Include="test\GameObjectTest.cpp" />
+    <ClCompile Include="test\TestEmptyComponent2.h" />
     <ClCompile Include="vendor\glm\detail\glm.cpp" />
+    <ClCompile Include="vendor\utility\IDFactory.cpp" />
+    <ClCompile Include="vulkan_engine\Buffer.cpp" />
+    <ClCompile Include="vulkan_engine\ShaderModule.cpp" />
+    <ClCompile Include="vulkan_engine\ShaderPipeline.cpp" />
     <ClCompile Include="vulkan_engine\VulkanEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -138,10 +147,15 @@
     <ClInclude Include="glfw_system\MouseButtonCode.h" />
     <ClInclude Include="glfw_system\System.h" />
     <ClInclude Include="glfw_system\Window.h" />
+    <ClInclude Include="src\ComponentType.h" />
     <ClInclude Include="src\component\EmptyComponent.h" />
+    <ClInclude Include="src\ComponentRegistry.h" />
     <ClInclude Include="src\IInput.h" />
     <ClInclude Include="src\IPhysicsEngine2D.h" />
     <ClInclude Include="src\IRenderer.h" />
+    <ClInclude Include="src\Resource.h" />
+    <ClInclude Include="src\ResourceManager.h" />
+    <ClInclude Include="src\scene\SceneManager.h" />
     <ClInclude Include="src\MemoryAllocationType.h" />
     <ClInclude Include="src\Component.h" />
     <ClInclude Include="src\GameObject.h" />
@@ -151,10 +165,12 @@
     <ClInclude Include="src\object\KeyControl.h" />
     <ClInclude Include="src\object\Stopwatch.h" />
     <ClInclude Include="src\object\Timer.h" />
+    <ClInclude Include="src\scene\Serializer.h" />
     <ClInclude Include="src\Time.h" />
     <ClInclude Include="src\Transform.h" />
     <ClInclude Include="test\FPSConsoleDisplay.h" />
     <ClInclude Include="test\GameObjectTest.h" />
+    <ClInclude Include="test\TestEmptyComponent1.h" />
     <ClInclude Include="vendor\glm\common.hpp" />
     <ClInclude Include="vendor\glm\detail\compute_common.hpp" />
     <ClInclude Include="vendor\glm\detail\compute_vector_relational.hpp" />
@@ -437,6 +453,12 @@
     <ClInclude Include="vendor\glm\vec3.hpp" />
     <ClInclude Include="vendor\glm\vec4.hpp" />
     <ClInclude Include="vendor\glm\vector_relational.hpp" />
+    <ClInclude Include="vendor\jsoncpp\json.hpp" />
+    <ClInclude Include="vendor\jsoncpp\json_fwd.hpp" />
+    <ClInclude Include="vendor\utility\IDFactory.h" />
+    <ClInclude Include="vulkan_engine\Buffer.h" />
+    <ClInclude Include="vulkan_engine\ShaderModule.h" />
+    <ClInclude Include="vulkan_engine\ShaderPipeline.h" />
     <ClInclude Include="vulkan_engine\VulkanEngine.h" />
   </ItemGroup>
   <ItemGroup>

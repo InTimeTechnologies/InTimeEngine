@@ -80,6 +80,11 @@ void GLFW::Window::mouseButtonCallback(GLFWwindow* window, int button, int actio
 
 	glfwWindow->input.mouseButtonsToReset.push_front(&glfwWindow->input.mouseButtons[mouseButtonIndex]);
 }
+void GLFW::Window::onWindowResizeCallback(GLFWwindow* glfwWindow, int width, int height) {
+	Window* window = (Window*)glfwGetWindowUserPointer(glfwWindow);
+	if (window != nullptr && window->renderer != nullptr)
+		window->renderer->onSurfaceResize(width, height);
+}
 
 // Object | public
 
@@ -92,7 +97,7 @@ GLFW::Window::Window(int width, int height, const std::string& title, GLFWmonito
 	// Set window hints prior to creation (remove this in production. This needs to be set outside of this class)
 	//glfwWindowHint(GLFW_MAXIMIZED, true);
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+	//glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 	// Create and set window user pointer
 	window = glfwCreateWindow(width, height, title.c_str(), monitor, share);
@@ -101,6 +106,7 @@ GLFW::Window::Window(int width, int height, const std::string& title, GLFWmonito
 	// Set callbacks
 	glfwSetKeyCallback(window, keyCallback);
 	glfwSetMouseButtonCallback(window, mouseButtonCallback);
+	glfwSetWindowSizeCallback(window, onWindowResizeCallback);
 
 	windowList.push_back(this);
 	node = std::prev(windowList.end());

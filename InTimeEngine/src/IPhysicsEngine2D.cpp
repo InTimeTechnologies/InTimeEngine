@@ -31,7 +31,7 @@
 
 // Constructor / Destructor
 IT::IPhysicsEngine2D::IPhysicsEngine2D() {
-	InTimeEngine* inTimeEngine = InTimeEngine::getSingleton();
+	InTimeEngine* inTimeEngine = InTimeEngine::s_getSingleton();
 	if (inTimeEngine == nullptr)
 		return;
 
@@ -40,7 +40,7 @@ IT::IPhysicsEngine2D::IPhysicsEngine2D() {
 		inTimeEngine->iPhysicsEngine2D = this; // Register this as In Time Engine's 2D physics engine
 }
 IT::IPhysicsEngine2D::~IPhysicsEngine2D() {
-	InTimeEngine* inTimeEngine = InTimeEngine::getSingleton();
+	InTimeEngine* inTimeEngine = InTimeEngine::s_getSingleton();
 	if (inTimeEngine == nullptr)
 		return;
 

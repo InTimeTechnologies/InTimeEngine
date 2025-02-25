@@ -8,7 +8,6 @@ set "outputDir=D:\source\vs_repos\InTimeEngine\InTimeEngine\shader_out"
 REM Create output directory if it doesn't exist
 if not exist "%outputDir%" mkdir "%outputDir%"
 
-
 echo source directory:   %sourceDir%
 echo compiler directory: %glslc%
 echo output directory:   %outputDir%
@@ -20,52 +19,28 @@ for /R %%F in (*) do (
 
     REM Check if the file has valid extension (vert, frag, geom, etc.)
     if /i "!extension!"==".vert" (
-        REM echo Compiling vertex shader: %%F
-        REM "%glslc%" "%%F" -o "%outputDir%\%%~nF.spv"
         set "extensionMatched=true"
     ) else if /i "!extension!"==".frag" (
-        REM echo Compiling shader: %%F
-        REM "%glslc%" "%%F" -o "%outputDir%\%%~nF.spv"
         set "extensionMatched=true"
     ) else if /i "!extension!"==".geom" (
-        REM Compiling shader: %%F
-        REM "%glslc%" "%%F" -o "%outputDir%\%%~nF.spv"
         set "extensionMatched=true"
     ) else if /i "!extension!"==".tesc" (
-        REM Compiling control shader: %%F
-        REM "%glslc%" "%%F" -o "%outputDir%\%%~nF.spv"
         set "extensionMatched=true"
     ) else if /i "!extension!"==".tese" (
-        REM Compiling shader: %%F
-        REM "%glslc%" "%%F" -o "%outputDir%\%%~nF.spv"
         set "extensionMatched=true"
     ) else if /i "!extension!"==".comp" (
-        REM Compiling shader: %%F
-        REM "%glslc%" "%%F" -o "%outputDir%\%%~nF.spv"
         set "extensionMatched=true"
     ) else if /i "!extension!"==".rgen" (
-        REM Compiling generation shader: %%F
-        REM "%glslc%" "%%F" -o "%outputDir%\%%~nF.spv"
         set "extensionMatched=true"
     ) else if /i "!extension!"==".rahit" (
-        REM Compiling ray hit  shader: %%F
-        REM "%glslc%" "%%F" -o "%outputDir%\%%~nF.spv"
         set "extensionMatched=true"
     ) else if /i "!extension!"==".rchit" (
-        REM Compiling ray c hit shader: %%F
-        REM "%glslc%" "%%F" -o "%outputDir%\%%~nF.spv"
         set "extensionMatched=true"
     ) else if /i "!extension!"==".rmiss" (
-        REM Compiling ray miss shader: %%F
-        REM "%glslc%" "%%F" -o "%outputDir%\%%~nF.spv"
         set "extensionMatched=true"
     ) else if /i "!extension!"==".shader" (
-        REM Compiling shader: %%F
-        REM "%glslc%" "%%F" -o "%outputDir%\%%~nF.spv"
         set "extensionMatched=true"
     ) else if /i "!extension!"==".glsl" (
-        REM Compiling glsl shader: %%F
-        REM "%glslc%" "%%F" -o "%outputDir%\%%~nF.spv"
         set "extensionMatched=true"
     ) else (
         echo Skipping: %%F
@@ -90,10 +65,9 @@ for /R %%F in (*) do (
 
         echo compiling "!filePath!" -o "!outputDir!\!localPath!"
         echo ".\%glslc%" "!filePath!" -o "!outputDir!\!localPath!"
-        "%glslc%" "!filePath!" -o "!outputDir!\!localPath!"
+        "%glslc%" "!filePath!" -o "!outputDir!\!localPath!.spv"
     )
 )
 
 echo Compilation completed.
-pause
 exit

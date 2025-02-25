@@ -52,3 +52,6 @@ IT::IRenderer::~IRenderer() {
 void IT::IRenderer::render() {
 	// To be implemented in child class
 }
+void IT::IRenderer::onSurfaceResize(int width, int height) {
+	// To be implemented in child class
+}

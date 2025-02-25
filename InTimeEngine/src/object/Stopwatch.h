@@ -46,7 +46,7 @@ namespace IT {
 			// Events
 			void onPreCoreUpdate() override {
 				if (running)
-					timeElapsed += IT::InTimeEngine::getSingleton()->coreTime.getDeltaTime();
+					timeElapsed += IT::InTimeEngine::s_getSingleton()->time.getDeltaTime();
 			}
 			void onPostCoreUpdate() override {
 				// Ignored

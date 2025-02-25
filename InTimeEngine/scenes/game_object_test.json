@@ -1,0 +1,108 @@
+{
+    "gameObjects": [
+        {
+            "index": 0,
+            "id": 0,
+            "name": "Game Object",
+            "deleteOnDesttroy": true,
+            "transform": {
+                "parent": -1,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "index": 1,
+            "id": 0,
+            "name": "Game Object",
+            "deleteOnDesttroy": true,
+            "transform": {
+                "parent": -1,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "index": 2,
+            "id": 0,
+            "name": "Game Object",
+            "deleteOnDesttroy": true,
+            "transform": {
+                "parent": 1,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        }
+    ],
+    "components": [
+        {
+            "gameObject": 0,
+            "index": 0,
+            "typeName": "class IT::EmptyComponent"
+        },
+        {
+            "gameObject": 0,
+            "index": 1,
+            "typeName": "class IT::EmptyComponent"
+        },
+        {
+            "gameObject": 1,
+            "index": 2,
+            "typeName": "class IT::EmptyComponent"
+        },
+        {
+            "gameObject": 1,
+            "index": 3,
+            "typeName": "class IT::EmptyComponent"
+        },
+        {
+            "gameObject": 2,
+            "index": 4,
+            "typeName": "class IT::EmptyComponent"
+        },
+        {
+            "gameObject": 2,
+            "index": 5,
+            "typeName": "class IT::EmptyComponent"
+        }
+    ]
+}

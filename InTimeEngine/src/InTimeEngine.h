@@ -48,6 +48,9 @@
 #include "IRenderer.h"
 #include "IInput.h"
 
+#include "ComponentRegistry.h"
+#include "scene/SceneManager.h"
+
 // Namespace
 namespace IT {
 	class InTimeEngine {
@@ -57,11 +60,12 @@ namespace IT {
 		// Static
 		private:
 			// Properties
-			static InTimeEngine* singleton;
+			static InTimeEngine* s_singleton;
+			static bool s_initialized;
 
 		public:
 			// Getters
-			static InTimeEngine* getSingleton();
+			static InTimeEngine* s_getSingleton();
 
 		// Object
 		private:
@@ -71,11 +75,12 @@ namespace IT {
 
 		public:
 			// Properties
-			EngineTime engineTime = EngineTime();
-			Time coreTime = Time();
-			Time physicsTime = Time();
+			RealTime realTime = RealTime();
+			Time time = Time(std::chrono::nanoseconds(8333333), true);
+			Time fixedTime = Time(std::chrono::nanoseconds(16666666), true);
 			IPhysicsEngine2D* iPhysicsEngine2D = nullptr;
-			IRenderer* iRenderer = nullptr;
+			IRenderer* iRenderer = IRenderer::getSingleton();
+			EntityRegistry componentRegistry = EntityRegistry();
 
 			// Callbacks
 			std::function<bool()> onPauseCallback = std::function<bool()>();
@@ -123,7 +128,7 @@ namespace IT {
 	};
 }
 
-// Dependencies | Components
+// Dependencies | InTimeEngine | Components
 #include "component/EmptyComponent.h"
 
 // Dependencies | InTimeEngine | Object

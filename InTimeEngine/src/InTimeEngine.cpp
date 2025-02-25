@@ -32,34 +32,50 @@
 
 #include "InTimeEngine.h"
 
+// Dependencies | std
+#include <thread>
+
 // class InTimeEngine
 
 // Static | private
 
 // Properties
-IT::InTimeEngine* IT::InTimeEngine::singleton = nullptr;
+IT::InTimeEngine* IT::InTimeEngine::s_singleton = nullptr;
+bool IT::InTimeEngine::s_initialized = false;
 
 // Static | public
 
 // Getters
-IT::InTimeEngine* IT::InTimeEngine::getSingleton() {
-	return singleton;
+IT::InTimeEngine* IT::InTimeEngine::s_getSingleton() {
+	return s_singleton;
 }
 
 // Object | public
 
 // Constructor / Destructor
 IT::InTimeEngine::InTimeEngine(const std::filesystem::path& applicationDirectoryPath) {
-	if (singleton == nullptr)
-		singleton = this;
+	if (s_singleton == nullptr)
+		s_singleton = this;
 
-	// EngineTime
-	physicsTime.settings.fixedUpdate = true;
-	coreTime.settings.fixedUpdate = false;
+	// Initialize component registry
+	{
+		componentRegistry.engineEntries = std::vector<EntityRegistry::EngineEntry>(1);
+		IT::EntityRegistry::EngineEntry engineEntry = IT::EntityRegistry::EngineEntry();
+
+		// EmptyComponent
+		engineEntry.componentTypeID = 0;
+		engineEntry.typeInfo = &typeid(nullptr);
+		engineEntry.factory = [](GameObject& gameObject) -> Component* { return new EmptyComponent(gameObject); };
+		engineEntry.toJSON = [](Component*) -> nlohmann::ordered_json { return nlohmann::ordered_json::object(); };
+		engineEntry.fromJSON = [](GameObject& gameObject, nlohmann::ordered_json) -> Component* { return new EmptyComponent(gameObject); };
+		componentRegistry.engineEntries[0] = engineEntry;
+
+		// Other components
+	}
 }
 IT::InTimeEngine::~InTimeEngine() {
-	if (singleton != nullptr)
-		singleton = nullptr;
+	if (s_singleton != nullptr)
+		s_singleton = nullptr;
 
 	if (destroyGameObjectsOnDelete)
 		GameObject::destroyGameObjectsImmediately();
@@ -76,36 +92,49 @@ bool IT::InTimeEngine::getShouldTerminate() const {
 // Functions
 void IT::InTimeEngine::run() {
 	// Set up time
-	engineTime.updateRealTime();
-	coreTime.resetTime(engineTime.runTime);
-	physicsTime.resetTime(engineTime.runTime);
+	realTime.updateRealTime();
+	time.resetTime(realTime.runTime);
+	fixedTime.resetTime(realTime.runTime);
 
 	// Engine / game loop
 	while (!shouldStop) {
 		// Update real time / run time. It's necessary for physics and core time to work
-		engineTime.updateRealTime();
+		realTime.updateRealTime();
 
-		// bool physicsRequiresUpdate = time.physicsTime.updateTime(time.runTime);
-		bool coreRequiresUpdate = coreTime.updateTime(engineTime.runTime);
-		bool physicsRequiresUpdate = physicsTime.updateTime(engineTime.runTime);
+		// Sleep thread if it is not necessary to updte
+		if (!(time.shouldUpdate(realTime.runTime) || fixedTime.shouldUpdate(realTime.runTime))) {
+			std::chrono::nanoseconds nextTimeUpdate = time.nextTimeToUpdate();
+			std::chrono::nanoseconds nextFixedTimeUpdate= fixedTime.nextTimeToUpdate();
+			std::chrono::nanoseconds sleepTime = (nextTimeUpdate < nextFixedTimeUpdate ? nextTimeUpdate : nextFixedTimeUpdate);
+			std::chrono::high_resolution_clock::time_point sleepUntilTime = std::chrono::high_resolution_clock::time_point(sleepTime);
+			//if (sleepTime - realTime.runTime > std::chrono::microseconds(1LL)) {
+				//std::cout << "Game loop sleep time: " << sleepTime << std::endl;
+			std::this_thread::sleep_until(sleepUntilTime);
+			//}
+			continue;
+		}
+
+		// bool physicsRequiresUpdate = time.fixedTime.updateTime(time.runTime);
+		bool coreRequiresUpdate = time.update(realTime.runTime);
+		bool physicsRequiresUpdate = fixedTime.update(realTime.runTime);
 
 		// If core or physics requires update, update UI and input
 		if (coreRequiresUpdate || physicsRequiresUpdate) {
 			resetInput();
 			processInput();
-		}
 
-		// Init components (enable, disable, start)
-		initializeLogics();
+			// Init components (enable, disable, start)
+			initializeLogics();
+		}
 
 		// Update physics if it requires update
 		if (physicsRequiresUpdate) {
 			do {
 				// Update physics engine
 				prePhysicsUpdate();
-				updatePhysics(physicsTime.getScaledDeltaTimeF());
+				updatePhysics(fixedTime.getScaledDeltaTimeF());
 				postPhysicsUpdate();
-			} while (physicsTime.updateTime(engineTime.runTime));
+			} while (fixedTime.update(realTime.runTime));
 		}
 
 		// Update core if it requires update
@@ -114,13 +143,13 @@ void IT::InTimeEngine::run() {
 			preUpdate();
 			coreUpdate();
 			postUpdate();
-		}
 
-		// Render
-		if (iRenderer != nullptr && coreRequiresUpdate) {
-			preRender();
-			render();
-			postRender();
+			// Render
+			if (iRenderer != nullptr) {
+				preRender();
+				render();
+				postRender();
+			}
 		}
 
 		// Collect garbage

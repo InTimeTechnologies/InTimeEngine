@@ -28,6 +28,9 @@
 // Dependencies | GLFWInterface
 #include "Input.h"
 
+// Dependencies | InTimeEngine
+#include "src/IRenderer.h"
+
 namespace GLFW {
 	class Window {
 		// Static
@@ -47,15 +50,17 @@ namespace GLFW {
 			// Callbacks
 			static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 			static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
+			static void onWindowResizeCallback(GLFWwindow* glfwWindow, int width, int height);
 
 		// Object
 		private:
 			// Properties
 			GLFWwindow* window = nullptr;
+			std::list<GLFW::Window*>::iterator node;
 
 		public:
 			// Properties
-			std::list<GLFW::Window*>::iterator node;
+			IT::IRenderer* renderer = nullptr;
 			GLFW::Input input;
 
 			// Constructor / Destructor

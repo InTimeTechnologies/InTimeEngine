@@ -1,0 +1,144 @@
+{
+    "gameObjects": [
+        {
+            "sceneIndex": 0,
+            "id": 1,
+            "name": "Game Object 1",
+            "deleteOnDestroy": true,
+            "transform": {
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "sceneIndex": 1,
+            "id": 2,
+            "name": "Game Object 2",
+            "deleteOnDestroy": true,
+            "transform": {
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "sceneIndex": 2,
+            "id": 3,
+            "name": "Game Object 3",
+            "deleteOnDestroy": true,
+            "transform": {
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        }
+    ],
+    "transformRelationships": [
+        {
+            "sceneIndex": 2,
+            "parent": 1
+        }
+    ],
+    "components": [
+        {
+            "sceneIndex": 0,
+            "gameObject": 0,
+            "componentType": 0,
+            "typeInfo": "class IT::EmptyComponent",
+            "data": {}
+        },
+        {
+            "sceneIndex": 1,
+            "gameObject": 0,
+            "componentType": 0,
+            "typeInfo": "class IT::EmptyComponent",
+            "data": {}
+        },
+        {
+            "sceneIndex": 2,
+            "gameObject": 0,
+            "componentType": 0,
+            "typeInfo": "class IT::EmptyComponent",
+            "data": {}
+        },
+        {
+            "sceneIndex": 3,
+            "gameObject": 1,
+            "componentType": 0,
+            "typeInfo": "class IT::EmptyComponent",
+            "data": {}
+        },
+        {
+            "sceneIndex": 4,
+            "gameObject": 1,
+            "componentType": 0,
+            "typeInfo": "class IT::EmptyComponent",
+            "data": {}
+        },
+        {
+            "sceneIndex": 5,
+            "gameObject": 1,
+            "componentType": 0,
+            "typeInfo": "class IT::EmptyComponent",
+            "data": {}
+        },
+        {
+            "sceneIndex": 6,
+            "gameObject": 2,
+            "componentType": 0,
+            "typeInfo": "class IT::EmptyComponent",
+            "data": {}
+        },
+        {
+            "sceneIndex": 7,
+            "gameObject": 2,
+            "componentType": 0,
+            "typeInfo": "class IT::EmptyComponent",
+            "data": {}
+        },
+        {
+            "sceneIndex": 8,
+            "gameObject": 2,
+            "componentType": 0,
+            "typeInfo": "class IT::EmptyComponent",
+            "data": {}
+        }
+    ]
+}
